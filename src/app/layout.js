@@ -1,5 +1,12 @@
-import './globals.css'
+"use client";
+
+import CssBaseline from '@mui/material/CssBaseline';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import ThemeProvider from './theme/ThemeProvider';
+
 import { Jost } from 'next/font/google'
+import SidebarProvider from '@/context/SidebarContext';
 
 const jost = Jost({ 
   subsets: ['latin'],
@@ -10,10 +17,16 @@ const jost = Jost({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={jost.className}>
-        <p>This is actually from root layout</p>
-        {children}
-      </body>
+      <SidebarProvider>
+        <ThemeProvider>
+          <body className={jost.className}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <CssBaseline />
+                {children}
+              </LocalizationProvider>
+          </body>
+        </ThemeProvider>
+      </SidebarProvider>
     </html>
   )
 }
