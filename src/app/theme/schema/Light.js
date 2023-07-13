@@ -409,7 +409,8 @@ export const LightTheme = createTheme({
       styleOverrides: {
         'html, body': {
           width: '100%',
-          height: '100%'
+          height: '100%',
+          fontFamily: 'var(--font-jost)'
         },
         body: {
           display: 'flex',
@@ -526,17 +527,6 @@ export const LightTheme = createTheme({
         }
       }
     },
-    MuiListSubheader: {
-      styleOverrides: {
-        colorPrimary: {
-          fontWeight: 'bold',
-          lineHeight: '40px',
-          fontSize: 13,
-          background: colors.alpha.black[5],
-          color: colors.alpha.black[70]
-        }
-      }
-    },
     MuiCardHeader: {
       styleOverrides: {
         action: {
@@ -615,13 +605,6 @@ export const LightTheme = createTheme({
             border: 0,
             background: 'transparent'
           }
-        }
-      }
-    },
-    MuiListItemAvatar: {
-      styleOverrides: {
-        alignItemsFlexStart: {
-          marginTop: 0
         }
       }
     },
@@ -731,22 +714,6 @@ export const LightTheme = createTheme({
         }
       }
     },
-    MuiListItemText: {
-      styleOverrides: {
-        root: {
-          margin: 0
-        }
-      }
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          '& .MuiTouchRipple-root': {
-            opacity: 0.3
-          }
-        }
-      }
-    },
     MuiDivider: {
       styleOverrides: {
         root: {
@@ -834,7 +801,10 @@ export const LightTheme = createTheme({
       styleOverrides: {
         root: {
           padding: 0,
-
+          
+          '& a' :{
+            textDecoration: 'none'
+          },
           '& .MuiListItem-button': {
             transition: 'all .2s',
 
@@ -847,10 +817,10 @@ export const LightTheme = createTheme({
             }
           },
           '& .MuiListItem-root.MuiButtonBase-root.Mui-selected': {
-            backgroundColor: alpha(colors.primary.lighter, 0.4)
+            backgroundColor: colors.primary.light
           },
           '& .MuiMenuItem-root.MuiButtonBase-root:active': {
-            backgroundColor: alpha(colors.primary.lighter, 0.4)
+            backgroundColor: colors.primary.light,
           },
           '& .MuiMenuItem-root.MuiButtonBase-root .MuiTouchRipple-root': {
             opacity: 0.2
@@ -862,6 +832,91 @@ export const LightTheme = createTheme({
           '& .MuiListItem-button': {
             borderRadius: 6,
             margin: '1px 0'
+          }
+        }
+      }
+    },
+    MuiListSubheader: {
+      styleOverrides: {
+        colorPrimary: {
+          fontWeight: 'bold',
+          lineHeight: '40px',
+          fontSize: 13,
+          background: colors.alpha.black[5],
+          color: colors.alpha.black[70]
+        }
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'var(--font-jost)',
+          margin: 0,
+        }
+      }
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          padding: `11.700000000000001px 16.2px`,
+          color: colors.secondary.lighter,
+          transition: '0.3s all ease',
+
+          '& .MuiSvgIcon-root': {
+            color: colors.secondary.lighter,
+          },
+        
+          '& .MuiTypography-root' : {
+            fontSize: '16px'
+          },
+        
+          '&:hover' : {
+            background: colors.primary.light,
+            color: colors.primary.main,
+            boxShadow: colors.shadows.box,
+            
+            '& .MuiSvgIcon-root': {
+              color: colors.primary.main,
+            }
+        
+          },
+
+          '&.active' : {
+            background: colors.primary.light,
+            color: colors.primary.main,
+            boxShadow: colors.shadows.card,
+            
+            '& .MuiSvgIcon-root': {
+              color: colors.primary.main,
+            }
+        
+          },
+
+          '& .MuiTouchRipple-root': {
+            opacity: 0.3
+          }
+        }
+      }
+    },
+    MuiListItemAvatar: {
+      styleOverrides: {
+        alignItemsFlexStart: {
+          marginTop: 0
+        }
+      }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          marginBottom: '5px',
+
+          '&.MuiButtonBase-root': {
+            color: colors.secondary.lighter,
+
+            '&:hover, &:active, &.active, &.Mui-selected': {
+              color: colors.primary.main,
+              background: colors.primary.lighter
+            }
           }
         }
       }
@@ -942,7 +997,7 @@ export const LightTheme = createTheme({
       styleOverrides: {
         root: {
           background: 'transparent',
-          transition: 'all .2s',
+          transition: 'all .3s',
 
           '&:hover, &:active, &.active, &.Mui-selected': {
             color: colors.alpha.black[100],
@@ -950,20 +1005,6 @@ export const LightTheme = createTheme({
           },
           '&.Mui-selected:hover': {
             background: alpha(colors.primary.lighter, 0.4)
-          }
-        }
-      }
-    },
-    MuiListItem: {
-      styleOverrides: {
-        root: {
-          '&.MuiButtonBase-root': {
-            color: colors.secondary.main,
-
-            '&:hover, &:active, &.active, &.Mui-selected': {
-              color: colors.alpha.black[100],
-              background: lighten(colors.primary.lighter, 0.5)
-            }
           }
         }
       }
@@ -1215,8 +1256,7 @@ export const LightTheme = createTheme({
     borderRadius: 12
   },
   typography: {
-    fontFamily:
-      '"Farsan", cursive, "Geologica", sans-serif, "Jost", sans-serif, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+    fontFamily: "var(--font-jost)",
     h1: {
       fontWeight: 700,
       fontSize: 35
