@@ -81,12 +81,12 @@ const menuItems = [
   {
     text: "Recent Works",
     icon: WorkIcon,
-    link: '/recent-works'
+    link: '/work'
   },
   {
     text: "Consult Now",
     icon: ConsultIcon,
-    link: '/consult-now'
+    link: '/consult'
   }
 ]
 

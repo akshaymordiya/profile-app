@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import MuiIconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Slide from '@mui/material/Slide';
 
 import Logo from '../Logo';
 import Profile from './Profile';
@@ -19,7 +20,8 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 import {
   styled,
-  useTheme
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 
 import Image from 'next/image';
@@ -28,7 +30,7 @@ import { SidebarContext } from "../../../../context/SidebarContext";
 
 const openedMixin = (theme) => ({
   width: theme.sidebar.width,
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create(['width', 'opacity', 'transform'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
@@ -36,7 +38,7 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create(['width', 'opacity', 'transform'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
@@ -53,8 +55,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
-    [theme.breakpoints.down('lg')]: {
-      display: 'none'
+    transition: '.3 all ease-in-out',
+    [theme.breakpoints.down('lg')]: open ? {
+      opacity: 1,
+      transform: 'translateX(0)',
+      boxShadow: theme.colors.shadows.card,
+      height: '100%',
+      zIndex: '999',
+      position: 'fixed'
+    } : {
+      position: 'fixed',
+      opacity: 0,
+      transform:`translateX(-${theme.sidebar.width})`,
+      height: '100%'
     },
     ...(open ? openedMixin(theme) : closedMixin(theme)),
 
@@ -125,7 +138,7 @@ const Sidebar = () => {
           </Scrollbar>
         </SidebarWrapper>
         {sidebarToogle ? (
-          <Stack direction="column" px={1} pb={2} alignItems="center" spacing={{lg : 2, xlg: 4}}>
+          <Stack direction="column" px={1} pb={2} alignItems="center" spacing={2}>
             <Image sx={{ border: '1px solid red'}} src="/bg/docs.png" width={80} height={80} alt='docs_png' />
             <DownloadText variant='p' >
               Click below to download my resume <br />

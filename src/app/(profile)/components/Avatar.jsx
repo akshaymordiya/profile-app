@@ -3,13 +3,13 @@ import Image from 'next/image'
 
 import MuiAvatar from '@mui/material/Avatar';
 import MuiBox from '@mui/material/Box';
-import { styled  } from "@mui/material";
+import { styled, useTheme  } from "@mui/material";
 
-const Box = styled(MuiBox)(({ theme }) => ({
+const Box = styled(MuiBox)(() => ({
   position: 'relative',
 }));
 
-const ImageWrapper = styled(Image)(({ theme }) => ({
+const ImageWrapper = styled(Image)(() => ({
   position: 'absolute',
   top: '-4.5px',
   left: '-4.5px'
@@ -23,12 +23,17 @@ const Avatar = ({
   alt = "Profile Avatar"
 }) => {
 
+  const theme = useTheme();
+
   if(!wrapWithDashedBorder){
     return (
       <MuiAvatar
         alt={alt}
         src={src}
-        sx={{ width: `${width}px`, height: `${height}px` }}
+        sx={{ 
+          width: `${width}px`, height: `${height}px`,
+          boxShadow: theme.colors.shadows.card
+        }}
       />
     )
   }

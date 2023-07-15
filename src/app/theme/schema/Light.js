@@ -194,7 +194,10 @@ export const LightTheme = createTheme({
       primary: colors.shadows.primary,
       info: colors.shadows.info,
       warning: colors.shadows.warning,
-      box: colors.shadows.box
+      box: colors.shadows.box,
+      cardSm: colors.shadows.cardSm,
+      card: colors.shadows.card,
+      cardLg: colors.shadows.cardLg,
     },
     alpha: {
       white: {
@@ -517,6 +520,12 @@ export const LightTheme = createTheme({
         root: {
           '& .MuiInputAdornment-positionEnd.MuiInputAdornment-outlined': {
             paddingRight: 6
+          },
+          '&.MuiInputLabel-root': {
+            fontWeight: 'light'
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            border: 'none'
           },
           '&:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: colors.alpha.black[50]
@@ -1015,6 +1024,10 @@ export const LightTheme = createTheme({
           margin: 1
         },
         root: {
+          padding: '3px 0',
+          '& .MuiInputLabel-root': {
+            fontWeight: 300
+          },
           '.MuiAutocomplete-inputRoot.MuiOutlinedInput-root .MuiAutocomplete-endAdornment':
             {
               right: 14

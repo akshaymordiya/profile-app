@@ -2,6 +2,7 @@
 import { Box, useTheme } from '@mui/material';
 
 import Sidebar from "./components/Sidebar"
+import Header from './components/Header';
 
 export default function AppLayout({ children }) {
   const theme = useTheme();
@@ -15,17 +16,16 @@ export default function AppLayout({ children }) {
           height: '100%',
         }}
       >
-        {/* <Header /> */}
         <Sidebar />
         <Box
           sx={{            
             display: 'block',
-            pt: `${theme.header.height}`,
             [theme.breakpoints.up('lg')]: {
               width: '100%'
             }
           }}
         >
+          <Header />
           <Box display="block">{children}</Box>
         </Box>
       </Box>
