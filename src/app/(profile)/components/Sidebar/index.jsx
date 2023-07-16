@@ -21,7 +21,6 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import {
   styled,
   useTheme,
-  useMediaQuery
 } from '@mui/material';
 
 import Image from 'next/image';
@@ -34,7 +33,7 @@ const openedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: 'hidden',
+  overflow: 'hidden',
 });
 
 const closedMixin = (theme) => ({
@@ -42,7 +41,7 @@ const closedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
+  overflow: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
@@ -59,7 +58,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     [theme.breakpoints.down('lg')]: open ? {
       opacity: 1,
       transform: 'translateX(0)',
-      boxShadow: theme.colors.shadows.card,
       height: '100%',
       zIndex: '999',
       position: 'fixed'
@@ -123,19 +121,17 @@ const Sidebar = () => {
         variant="permanent"
       >
         <SidebarWrapper>
-          <Scrollbar>
-            <Stack  my={3} mt={2} mx={2} spacing={!sidebarToogle ? 2 : 0} direction={sidebarToogle ? 'row' : 'column-reverse' } justifyContent="space-between" alignItems="center">                
-              <Logo  />
-              <IconButton
-                aria-label="open menu"
-                onClick={toogleSidebar}
-              >
-                <MenuOpenRoundedIcon fontSize='medium'/>
-              </IconButton>
-            </Stack>
-            <Profile />
-            <SidebarMenu />
-          </Scrollbar>
+          <Stack  my={3} mt={2} mx={2} spacing={!sidebarToogle ? 2 : 0} direction={sidebarToogle ? 'row' : 'column-reverse' } justifyContent="space-between" alignItems="center">                
+            <Logo  />
+            <IconButton
+              aria-label="open menu"
+              onClick={toogleSidebar}
+            >
+              <MenuOpenRoundedIcon fontSize='medium'/>
+            </IconButton>
+          </Stack>
+          <Profile />
+          <SidebarMenu />
         </SidebarWrapper>
         {sidebarToogle ? (
           <Stack direction="column" px={1} pb={2} alignItems="center" spacing={2}>

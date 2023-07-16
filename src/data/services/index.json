@@ -1,0 +1,38 @@
+[
+  {
+    "id": "web-development",
+    "title": "Web App Development",
+    "excert": "Unleash the Power of the Web: Transforming Ideas into Dynamic and Scalable Applications through Web Development.",
+    "icon": "/services/webapp.svg"
+  },
+  {
+    "id": "website-development",
+    "title": "Website Development",
+    "excert": "Transforming Ideas into Digital Realities: Empowering Businesses with Custom Website Development.",
+    "icon": "/services/website.svg"
+  },
+  {
+    "id": "mobile-development",
+    "title": "Mobile App Development",
+    "excert": "Empowering Mobile Experiences: Building Innovative Apps that Connect, Engage, and Inspire.",
+    "icon": "/services/mobile.svg"
+  },
+  {
+    "id": "desktop-development",
+    "title": "Desktop App Development",
+    "excert": "Unleashing Desktop Solutions: Empowering Efficiency and Productivity with Customized App Development.",
+    "icon": "/services/desktop.svg"
+  },
+  {
+    "id": "ui-ux-design",
+    "title": "UI/UX Design",
+    "excert": "Elevate User Experiences: Crafting Intuitive and Engaging Designs for Seamless Digital Interactions.",
+    "icon": "/services/uiux.svg"
+  },
+  {
+    "id": "rest-api-development",
+    "title": "Rest API Development",
+    "excert": " Building Seamless Connections: Empowering Applications with Robust REST API Development.",
+    "icon": "/services/api.svg"
+  }
+]

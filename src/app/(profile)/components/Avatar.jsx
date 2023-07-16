@@ -20,19 +20,23 @@ const Avatar = ({
   src,
   width = 36,
   height = 36,
+  disableShadow = false,
+  sx = {},
   alt = "Profile Avatar"
 }) => {
 
   const theme = useTheme();
 
   if(!wrapWithDashedBorder){
+    console.log("running");
     return (
       <MuiAvatar
         alt={alt}
         src={src}
         sx={{ 
           width: `${width}px`, height: `${height}px`,
-          boxShadow: theme.colors.shadows.card
+          boxShadow: disableShadow ? 'none' : theme.colors.shadows.card,
+          ...sx
         }}
       />
     )
@@ -44,7 +48,7 @@ const Avatar = ({
       <MuiAvatar 
         alt={alt}
         src={src}
-        sx={{ width: `${width}px`, height: `${height}px` }}
+        sx={{ width: `${width}px`, height: `${height}px`, ...sx }}
       />
     </Box>
   )

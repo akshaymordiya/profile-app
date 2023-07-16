@@ -22,8 +22,8 @@ const Box = styled(MuiBox, { shouldForwardProp : (prop) => prop !== "open"})(({ 
   width: "100%",
   height: theme.header.height,
   padding: `0 ${theme.spacing(4)}`,
-  [theme.breakpoints.down('md')]: {
-    margin: `${theme.spacing(1)} 0`
+  [theme.breakpoints.down('lg')]: {
+    padding: `0 ${theme.spacing(2)}`
   },
   [theme.breakpoints.down('sm')]: {
     margin: `${theme.spacing(3)} 0`,
@@ -63,7 +63,7 @@ const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
 }));
 
 const Header = () => {
-  const { sidebarToogle, toogleSidebar } = useContext(SidebarContext);
+  const { toogleSidebar } = useContext(SidebarContext);
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme => theme.breakpoints.up('md') && theme.breakpoints.down('lg'));
 

@@ -15,7 +15,7 @@ const themeColors = {
   brownLight: '#D7D3B4',
   error: '#E02A1A',
   info: '#33C2FF',
-  black: '#223354',
+  black: '#000000',
   blackLight: '#070707',
   blackExtraLight: '#2C2C2C',
   white: '#ffffff',
@@ -26,7 +26,7 @@ const themeColors = {
 
 const colors = {
   gradients: {
-    border: 'linear-gradient(to right, rgba(16, 176, 95, 1), rgba(135, 212, 158, 1), rgba(22, 177, 98, 1))',
+    border: 'linear-gradient(to right, rgba(16, 176, 95, 1), rgba(245, 245, 245, 0), rgba(22, 177, 98, 1))',
     exp: 'linear-gradient(135deg, rgba(148, 254, 254, 1), rgba(155, 245, 145, 1), rgba(252, 193, 91, 1))',
     meetup: 'linear-gradient(135deg, rgba(99, 182, 205, 1), rgba(159, 185, 148, 1), rgba(151, 255, 128, 1))',
     hours: 'linear-gradient(135deg, rgba(153, 233, 134, 1), rgba(156, 185, 147, 1), rgba(116, 183, 189, 1))',
@@ -62,7 +62,8 @@ const colors = {
     cardSm:
       '0px 2px 3px rgba(159, 162, 191, .18), 0px 1px 1px rgba(159, 162, 191, 0.32)',
     cardLg:
-      '0 5rem 14rem 0 rgb(255 255 255 / 30%), 0 0.8rem 2.3rem rgb(0 0 0 / 60%), 0 0.2rem 0.3rem rgb(0 0 0 / 45%)'
+      '0 5rem 14rem 0 rgb(255 255 255 / 30%), 0 0.8rem 2.3rem rgb(0 0 0 / 60%), 0 0.2rem 0.3rem rgb(0 0 0 / 45%)',
+    cardSmooth: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'
   },
   layout: {
     general: {
@@ -195,9 +196,11 @@ export const LightTheme = createTheme({
       info: colors.shadows.info,
       warning: colors.shadows.warning,
       box: colors.shadows.box,
+
       cardSm: colors.shadows.cardSm,
       card: colors.shadows.card,
       cardLg: colors.shadows.cardLg,
+      cardSmooth: colors.shadows.cardSmooth
     },
     alpha: {
       white: {
@@ -307,6 +310,11 @@ export const LightTheme = createTheme({
     background: colors.white.lighter,
     textColor: colors.secondary.main
   },
+  footer: {
+    height: '60px',
+    background: colors.white.lighter,
+    textColor: colors.secondary.main
+  },
   spacing: 9,
   palette: {
     common: {
@@ -349,6 +357,18 @@ export const LightTheme = createTheme({
       main: colors.warning.main,
       dark: colors.warning.dark,
       contrastText: colors.alpha.white[100]
+    },
+    white: {
+      lighter: themeColors.dullWhite,
+      light: themeColors.labelWhite,
+      main: themeColors.white,
+      dark: darken(themeColors.white, 0.2)
+    },
+    black: {
+      lighter: themeColors.blackLight,
+      light: themeColors.blackExtraLight,
+      main: themeColors.black,
+      dark: darken(themeColors.info, 0.2)
     },
     text: {
       primary: colors.secondary.main,
@@ -410,17 +430,35 @@ export const LightTheme = createTheme({
     },
     MuiCssBaseline: {
       styleOverrides: {
+        '&::-webkit-scrollbar': {
+          width: '5px',
+          height: '5px'
+        },
+
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent' 
+        },
+
+        '&::-webkit-scrollbar-thumb': {
+          background: 'transparent',
+          transition: '0.3s all ease',
+          borderRadius: '40px'
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          background: colors.primary.lighter
+        },
+
         'html, body': {
           width: '100%',
           height: '100%',
-          fontFamily: 'var(--font-jost)'
+          fontFamily: 'var(--font-jost)',
         },
         body: {
           display: 'flex',
           flexDirection: 'column',
           minHeight: '100%',
           width: '100%',
-          flex: 1
+          flex: 1,
         },
         '#__next': {
           width: '100%',
