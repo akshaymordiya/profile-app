@@ -52,17 +52,31 @@ const CompletedWork = () => {
       firstTextProps={{
         variant: "h3",
         sx: {
-          fontSize: '40px',
+          fontSize: {
+            xs: "38px",
+            sm: "38px",
+            md: '33px',
+            lg: "40px", 
+            xl : "50px", 
+            xxl : "65px"
+          },
           color: theme.palette.black.main,
           fontWeight: 700,
-          marginTop: isMobile ? theme.spacing(0.9) : '0px'
+          marginTop: isMobile ? theme.spacing(2) : '0px'
         }
       }}
       secondText="Completed Works"
       secondTextProps={{
         variant: 'h6',
         sx: {
-          fontSize: '24',
+          fontSize: {
+            xs: "18px",
+            sm: "18px",
+            md: "16px",
+            lg: "16px", 
+            xl : "24px", 
+            xxl: "32px"
+          },
           color: theme.palette.secondary.main,
           fontWeight: 400
         }

@@ -14,14 +14,19 @@ const Box = styled(MuiBox)(({ theme }) => ({
   left: '20%',
   overflow: 'hidden',
   borderRadius: '100%',
-  width: '230px',
-  height: '230px'
+  width: '120%',
+  height: '100%'
 }));
 
-const WorkImage = styled(Image)(() => ({
+const WorkImage = styled("img")(({ theme }) => ({
   position: "absolute",
   bottom: "5%",
-  right: "5%"
+  right: "5%",
+  width: "40%",
+  height: "40%",
+  [theme.breakpoints.up('xl')]: {
+    right: "10%"
+  }
 }));
 
 const Hourse = () => {
@@ -50,7 +55,14 @@ const Hourse = () => {
       firstTextProps={{
         variant: "h6",
         sx: {
-          fontSize: '18px',
+          fontSize: {
+            xs: "16px",
+            sm: "16px",
+            md: "16px",
+            lg: "18px", 
+            xl : "26px", 
+            xxl: "32px"
+          },
           color: theme.palette.black.main,
         }
       }}
@@ -58,7 +70,14 @@ const Hourse = () => {
       secondTextProps={{
         variant: 'p',
         sx: {
-          fontSize: '16px',
+          fontSize: {
+            xs: "16px",
+            sm: "16px",
+            md: "16px",
+            lg: "16px", 
+            xl : "24px", 
+            xxl: "30px"
+          },
           color: theme.palette.secondary.main
         }
       }}

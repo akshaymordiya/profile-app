@@ -91,6 +91,9 @@ const menuItems = [
 ]
 
 const ListItemButton = styled(MuiListItemButton, { shouldForwardProp: (prop) => prop !== 'open'})(({ open }) => ({
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
   ...(!open ? {
     '& .MuiListItemIcon-root' : {
       marginLeft: '-2px',

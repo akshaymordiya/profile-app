@@ -303,7 +303,10 @@ export const LightTheme = createTheme({
     menuItemHeadingColor: colors.layout.sidebar.menuItemHeadingColor,
     boxShadow:
       'rgba(0, 0, 0, 0.04) 0px 3px 5px',
-    width: '250px'
+    width: '16%',
+    fixedPositionWidthLg: '25%',
+    fixedPositionWidthMd: '33%',
+    fixedPositionWidthSm: '55%',
   },
   header: {
     height: '80px',
@@ -401,7 +404,8 @@ export const LightTheme = createTheme({
       sm: 600,
       md: 960,
       lg: 1280,
-      xl: 1840
+      xl: 1840,
+      xxl: 2000
     }
   },
   components: {

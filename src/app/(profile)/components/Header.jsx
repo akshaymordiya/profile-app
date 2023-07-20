@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 import MuiBox from "@mui/material/Box";
 import MuiStack from "@mui/material/Stack";
@@ -17,11 +17,14 @@ import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import { styled, useMediaQuery } from "@mui/material";
 import { SidebarContext } from '@/context/SidebarContext';
 
-const Box = styled(MuiBox, { shouldForwardProp : (prop) => prop !== "open"})(({ theme }) => ({
+const Box = styled(MuiBox, { shouldForwardProp : (prop) => prop !== "isScrolled"})(({ theme, isScrolled }) => ({
   display: "block",
   width: "100%",
+  position: 'sticky',
+  top: 0,
   height: theme.header.height,
   padding: `0 ${theme.spacing(4)}`,
+  transition: 'all 0.16s ease',
   [theme.breakpoints.down('lg')]: {
     padding: `0 ${theme.spacing(2)}`
   },
@@ -30,6 +33,11 @@ const Box = styled(MuiBox, { shouldForwardProp : (prop) => prop !== "open"})(({ 
     padding: `0 ${theme.spacing(2)}`,
     height: 'fit-content'
   },
+  ...(isScrolled && {
+    background: theme.colors.white.main,
+    boxShadow: theme.colors.shadows.box,
+    zIndex: '99'
+  })
 }));
 
 const Stack = styled(MuiStack)(({ theme }) => ({
@@ -55,7 +63,6 @@ const Autocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   marginLeft: '-15px',
   background: theme.colors.alpha.white[100],
   borderRadius: theme.general.borderRadius,
-  border: 'none',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     marginLeft: '0',
@@ -67,8 +74,23 @@ const Header = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme => theme.breakpoints.up('md') && theme.breakpoints.down('lg'));
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setIsScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <Box>
+    <Box isScrolled={isScrolled} >
       <Stack
         direction="row"
         justifyContent="space-between" 

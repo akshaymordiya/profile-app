@@ -40,7 +40,14 @@ const OngoingWorks = () => {
       firstTextProps={{
         variant: "h3",
         sx: {
-          fontSize: '55px',
+          fontSize: {
+            xs: "45px",
+            sm: "55px",
+            md: '40px', 
+            lg: "55px",
+            xl : "60px",
+            xxl: "80px"
+          },
           color: theme.palette.black.main,
           fontWeight: 700
         }
@@ -49,12 +56,20 @@ const OngoingWorks = () => {
       secondTextProps={{
         variant: 'h6',
         sx: {
-          fontSize: '24',
+          fontSize: {
+            xs: "18px",
+            sm: "18px",
+            md: "16px",
+            lg: "16px", 
+            xl : "24px", 
+            xxl: "32px"
+          },
           color: theme.palette.secondary.main,
           fontWeight: 400
         }
       }}
-      autoHeight={!isMobile}
+      noChildrens
+      forcedPosition="center"
     >
     </DetailBox>
   )

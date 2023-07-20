@@ -28,7 +28,6 @@ const Avatar = ({
   const theme = useTheme();
 
   if(!wrapWithDashedBorder){
-    console.log("running");
     return (
       <MuiAvatar
         alt={alt}

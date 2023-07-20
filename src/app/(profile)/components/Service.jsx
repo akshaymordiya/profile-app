@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 import MuiBox from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,7 +9,6 @@ const BoxBorder = styled(MuiBox)(({ theme }) => ({
   background: theme.colors.gradients.border,
   padding: `${theme.spacing(0.3)} ${theme.spacing(0.4)}`,
   borderRadius: theme.general.borderRadiusXl,
-  boxShadow: theme.colors.shadows.cardSmooth,
   transition: theme.transitions.create('all', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -29,26 +27,36 @@ const Box = styled(MuiBox)(({ theme }) => ({
   alignItems: 'center',
   padding: `${theme.spacing(3)} ${theme.spacing(2)}`,
   background: theme.colors.white.main,
+  boxShadow: theme.colors.shadows.cardSmooth,
   borderRadius: theme.general.borderRadiusXl,
   textAlign: "center",
-  height: '250px',
+  minHeight: "250px",
+  height: "calc(100vw / 6)",
   transition: theme.transitions.create('all', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }), 
   '&:hover' : {
-    background: theme.palette.primary.main,
-    color: theme.palette.white.main
+    background: theme.palette.primary.light,
+    color: theme.palette.primary.main
   }
 }));
 
 const ImageContainer = styled('div')(({ theme }) => ({
   position: 'relative',
-  width: '60px',
-  height: '60px',
+  width: '30%',
+  height: '30%',
   borderRadius: '100%',
-  background: theme.palette.primary.light
+  background: theme.palette.primary.light,
+  [theme.breakpoints.down('sm')]: {
+    width: '24%'
+  }
 }));
+
+const Image = styled('img')(() => ({
+  width: "80%",
+  height: "80%"
+}))
 
 const Service = ({
   service
@@ -57,10 +65,10 @@ const Service = ({
     <BoxBorder>
       <Box>
         <ImageContainer>
-          <Image src={service.icon} width={50} height={50} alt={service.title} />
+          <Image src={service.icon} alt={service.title} />
         </ImageContainer>
-        <Typography variant='h4' mt={2} mb={0.9} fontSize={18} color="black" >{service.title}</Typography>
-        <Typography>{service.excert}</Typography>
+        <Typography variant='h4' mt={2} mb={0.9} fontSize={{ lg: 18, xl: 26}} color="black" >{service.title}</Typography>
+        <Typography mt={{ xl: 1}} fontSize={{ lg: 14 , xl : 18}}>{service.excert}</Typography>
       </Box>
     </BoxBorder>
   )

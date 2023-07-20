@@ -7,14 +7,27 @@ import DetailBox from '../components/DetailBox'
 
 import { styled, useTheme, useMediaQuery } from "@mui/material";
 
-const Box = styled(MuiBox)(({ theme }) => ({
+const Box = styled(MuiBox, { shouldForwardProp: prop => prop !== "position"})(({ theme, position }) => ({
   background: theme.colors.gradients.exp,
   width: '100px',
   height: '100px',
   padding: theme.spacing(4),
   borderRadius: '100%',
+  marginBottom: ["left", "right"].includes(position) ? 0 : theme.spacing(4),
   [theme.breakpoints.up('lg')]: {
     marginBottom: theme.spacing(2),
+  },
+  [theme.breakpoints.up('xl')]: {
+    width: "150px",
+    height: "150px",
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(3),
+  },
+  [theme.breakpoints.up('xxl')]: {
+    width: "200px",
+    height: "200px",
+    padding: theme.spacing(0),
+    marginBottom: theme.spacing(3),
   },
   display: 'flex',
   justifyContent: 'center',
@@ -24,6 +37,12 @@ const Box = styled(MuiBox)(({ theme }) => ({
 const BoxWrapper = styled(MuiBox)(({ theme }) => ({
   background: theme.palette.white.main,
   padding: theme.spacing(2),
+  [theme.breakpoints.up('xxl')]: {
+    padding: theme.spacing(3.5),
+  },
+  [theme.breakpoints.up('xl')]: {
+    padding: theme.spacing(3),
+  },
   borderRadius: '100%',
   display: 'grid',
   placeItems: 'center'
@@ -48,6 +67,8 @@ const Expereince = () => {
     screen = "tablet"
   }
 
+  const textPosition = isMobile ? "right" : "bottom"
+
   return (
     <DetailBox
       padding={paddingBasedOnScreen[screen]}
@@ -55,7 +76,14 @@ const Expereince = () => {
       firstTextProps={{
         variant: "h6",
         sx: {
-          fontSize: '18px',
+          fontSize: {
+            xs: "18px",
+            sm: "16px", 
+            md: '16px',
+            lg: '18px', 
+            xl : '26px', 
+            xxl: '32px'
+          },
           color: theme.palette.black.main,
         }
       }}
@@ -63,16 +91,23 @@ const Expereince = () => {
       secondTextProps={{
         variant: 'p',
         sx: {
-          fontSize: '16px',
+          fontSize: {
+            xs: "18px",
+            sm: "16px",
+            md: '16px',
+            lg: "16px", 
+            xl : "24px", 
+            xxl: '30px'
+          },
           color: theme.palette.secondary.main
         }
       }}
-      textPosition={isMobile ? "right" : "bottom"}
+      textPosition={textPosition}
       autoHeight={isMobile}
     >
-      <Box>
+      <Box position={textPosition}>
         <BoxWrapper>
-          <Typography variant='h3'>5+</Typography>
+          <Typography variant='h3' fontSize={{ xl: 44, xxl : 60}}>5+</Typography>
         </BoxWrapper>
       </Box>
     </DetailBox>

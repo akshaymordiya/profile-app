@@ -29,6 +29,15 @@ import { SidebarContext } from "../../../../context/SidebarContext";
 
 const openedMixin = (theme) => ({
   width: theme.sidebar.width,
+  [theme.breakpoints.down('lg')]: {
+    width: theme.sidebar.fixedPositionWidthLg
+  },
+  [theme.breakpoints.down('md')]: {
+    width: theme.sidebar.fixedPositionWidthMd
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: theme.sidebar.fixedPositionWidthSm
+  },
   transition: theme.transitions.create(['width', 'opacity', 'transform'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -42,9 +51,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflow: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+  width: `5%`,
+  [theme.breakpoints.up('lg')]: {
+    width: '5%'
   },
 });
 
@@ -147,12 +156,12 @@ const Sidebar = () => {
             </Box>
           </Stack>
         ) : (
-          <Box px={2} py={2} >
+          <Box px={2} py={2} display="flex" justifyContent="center" >
             <IconButton
                aria-label="download resume"
                onClick={toogleSidebar}
                sx={{ 
-                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                boxShadow: theme.colors.shadows.cardSmooth,
                 background: theme.colors.primary.main,
                 color: theme.colors.alpha.white[100],
                 borderRadius: theme.general.borderRadius

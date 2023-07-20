@@ -21,7 +21,7 @@ const Services = () => {
   
   return (
     <Fragment>
-      <Typography variant="h5" mb={4} >Fuel Your Success: My Services, Your Growth</Typography>
+      <Typography variant="h5" mb={4} fontSize={{ xl: 28 }}>Fuel Your Success: My Services, Your Growth</Typography>
       <Grid 
         container 
         spacing={2} 

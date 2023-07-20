@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import MuiBox from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -8,21 +8,36 @@ import {
   styled,
 } from '@mui/material';
 
-const Box = styled(MuiBox, { shouldForwardProp: prop =>  !["padding", "autoHeight"].includes(prop)})(({ theme, padding, autoHeight }) => ({
+const forcedXPosition = {
+  "bottom": "flex-end",
+  "center": "center",
+  "top": "flex-start",
+}
+
+const Box = styled(MuiBox, { shouldForwardProp: prop =>  ![
+  "position", 
+  "padding",
+  "noChildrens"
+].includes(prop)})(({ theme, padding, position, noChildrens }) => ({
   padding: padding ? padding : theme.spacing(2),
   position: 'relative',
   borderRadius: theme.general.borderRadiusLg,
   background: theme.palette.white.main,
-  height: autoHeight ? "fit-content" : "230px",
-  overflow: 'hidden'
+  minHeight: (["left", "right"].includes(position)|| noChildrens) ? "fit-content" : "230px",
+  height: (["left", "right"].includes(position)) ? "auto" : "100%",
+  [theme.breakpoints.up('xl')]: {
+    height: "100%"
+  },
+  overflow: 'hidden',
+  boxShadow: theme.colors.shadows.cardSmooth
 }));
 
-const BoxWrapper = styled(MuiBox, { shouldForwardProp: prop => !["position", "forcePositionToBottom"].includes(prop) })(({ position, forcePositionToBottom }) => ({
+const BoxWrapper = styled(MuiBox, { shouldForwardProp: prop => !["position", "forcePositionToBottom"].includes(prop) })(({ theme, position, forcedPosition }) => ({
   display: 'flex',
   flexDirection: position === "top" ? 'column-reverse' : 'column',
-  justifyContent: forcePositionToBottom ? "flex-end" : 'space-between',
+  justifyContent: forcedPosition ? forcedXPosition[forcedPosition] : 'space-between',
   alignItems: 'center',
-  ...(forcePositionToBottom && {
+  ...(forcedPosition && {
     height: '100%'  
   })
 }));
@@ -47,13 +62,13 @@ const DetailBox = ({
   secondText,
   secondTextProps,
   padding = null,
-  autoHeight = false,
-  forcePositionToBottom = false
+  forcedPosition = false,
+  noChildrens = false
 }) => {
 
   if(['left', 'right'].includes(textPosition)){
     return (
-      <Box padding={padding} autoHeight={autoHeight}>
+      <Box padding={padding} position={textPosition}>
         <Grid container>
           <Grid item xs={6} md={6} lg= {6}>
             {textPosition === "left" ? (
@@ -77,13 +92,22 @@ const DetailBox = ({
   }
 
   return (
-    <Box padding={padding} autoHeight={autoHeight} >
-      <BoxWrapper position={textPosition} forcePositionToBottom={forcePositionToBottom}>
-        {children}
-        <MuiBox sx={MuiBoxSxForYPosition}>
-          <Typography {...firstTextProps}>{firstText}</Typography>
-          <Typography {...secondTextProps}>{secondText}</Typography>
-        </MuiBox>
+    <Box padding={padding} position={textPosition} noChildrens={noChildrens}>
+      <BoxWrapper position={textPosition} forcedPosition={forcedPosition}>
+        {noChildrens ? (
+          <Fragment>
+            <Typography {...firstTextProps}>{firstText}</Typography>
+            <Typography {...secondTextProps}>{secondText}</Typography>
+          </Fragment>
+        ) : (
+          <Fragment>
+            {children}
+            <MuiBox sx={MuiBoxSxForYPosition}>
+              <Typography {...firstTextProps}>{firstText}</Typography>
+              <Typography {...secondTextProps}>{secondText}</Typography>
+            </MuiBox>
+          </Fragment>
+        )}
       </BoxWrapper>
     </Box>
   )
