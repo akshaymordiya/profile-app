@@ -44,7 +44,9 @@ const AvatarThree = styled("img")(({ theme }) => ({
   }
 }))
 
-const Meetup = () => {
+const Meetup = ({
+  showLoader = false
+}) => {
   const theme = useTheme();
 
   return (
@@ -80,6 +82,7 @@ const Meetup = () => {
         }
       }}
       forcedPosition="bottom"
+      showLoader={showLoader}
     >
       <Box>
       </Box>

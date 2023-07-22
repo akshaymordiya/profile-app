@@ -29,7 +29,9 @@ const WorkImage = styled("img")(({ theme }) => ({
   }
 }));
 
-const Hourse = () => {
+const Hourse = ({
+  showLoader = false
+}) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -82,6 +84,7 @@ const Hourse = () => {
         }
       }}
       textPosition="top"
+      showLoader={showLoader}
     >
       <Box>
       </Box>

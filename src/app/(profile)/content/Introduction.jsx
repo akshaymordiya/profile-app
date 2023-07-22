@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 
 import Typography from "@mui/material/Typography";
 import MuiButton from "@mui/material/Button";
+import Skeleton from "@mui/material/Skeleton";
 
 import { styled } from "@mui/material";
 
@@ -52,7 +53,22 @@ const Button = styled(MuiButton)(({ theme }) => ({
   }
 }));
 
-const Introduction = () => {
+const Introduction = ({
+  showLoader = false
+}) => {
+
+  if(showLoader){
+    return (
+      <Fragment>
+        <Skeleton variant='text' animation="pulse" sx={{ height: "60px"}} />
+        <Skeleton variant='text' animation="pulse" sx={{ height: "60px" , width: "70%"}} />
+        <Skeleton variant='text' animation="pulse" sx={{ height: "40px" , width: "83%"}} />
+        <Skeleton variant='text' animation="pulse" sx={{ height: "40px", width: "50%"}} />
+        <Skeleton variant='text' animation="pulse" sx={{ height: "80px", width: "25%"}} />
+      </Fragment>
+    )
+  }
+
   return (
     <Fragment>
       <BrandTypography variant="h1">

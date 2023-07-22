@@ -1,33 +1,45 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import MuiBox from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 
 import { styled } from "@mui/material";
 
-const BoxBorder = styled(MuiBox)(({ theme }) => ({
-  background: theme.colors.gradients.border,
+const BoxBorder = styled(MuiBox, { shouldForwardProp: prop => prop !== "showLoader" })(({ theme, showLoader }) => ({
   padding: `${theme.spacing(0.3)} ${theme.spacing(0.4)}`,
+  ...(!showLoader && {
+    background: theme.colors.gradients.border,
+    '&:hover': {
+      background: 'transparent',
+      boxShadow: 'none'
+    }
+  }),
   borderRadius: theme.general.borderRadiusXl,
   transition: theme.transitions.create('all', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   cursor: 'pointer',
-  '&:hover': {
-    background: 'transparent',
-    boxShadow: 'none'
-  }
+  
 }));
 
-const Box = styled(MuiBox)(({ theme }) => ({
+const Box = styled(MuiBox, { shouldForwardProp: prop => prop !== "showLoader"})(({ theme, showLoader }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   padding: `${theme.spacing(3)} ${theme.spacing(2)}`,
-  background: theme.colors.white.main,
-  boxShadow: theme.colors.shadows.cardSmooth,
+  ...(!showLoader ? {
+    background: theme.colors.white.main,
+    boxShadow: theme.colors.shadows.cardSmooth,
+    '&:hover' : {
+      background: theme.palette.primary.light,
+      color: theme.palette.primary.main
+    }
+  } : {
+    background: theme.colors.white.light,
+  }),
   borderRadius: theme.general.borderRadiusXl,
   textAlign: "center",
   minHeight: "250px",
@@ -36,10 +48,7 @@ const Box = styled(MuiBox)(({ theme }) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }), 
-  '&:hover' : {
-    background: theme.palette.primary.light,
-    color: theme.palette.primary.main
-  }
+  
 }));
 
 const ImageContainer = styled('div')(({ theme }) => ({
@@ -59,16 +68,29 @@ const Image = styled('img')(() => ({
 }))
 
 const Service = ({
-  service
+  service,
+  showLoader
 }) => {
   return (
-    <BoxBorder>
-      <Box>
-        <ImageContainer>
-          <Image src={service.icon} alt={service.title} />
-        </ImageContainer>
-        <Typography variant='h4' mt={2} mb={0.9} fontSize={{ lg: 18, xl: 26}} color="black" >{service.title}</Typography>
-        <Typography mt={{ xl: 1}} fontSize={{ lg: 14 , xl : 18}}>{service.excert}</Typography>
+    <BoxBorder showLoader={showLoader}>
+      <Box showLoader={showLoader}>
+        {showLoader ? (
+          <Fragment>
+            <Skeleton variant='circular' animation="wave" sx={{ width : "70px", height: "70px", borderRadius: "50%"}} />
+            <Skeleton variant='rectangular' animation="wave" sx={{ width : "80%", height: "16px", my: 2}} />
+            <Skeleton variant='rectangular' animation="wave" sx={{ width : "95%", height: "12px", my: 0.5}} />
+            <Skeleton variant='rectangular' animation="wave" sx={{ width : "80%", height: "12px", my:0.5}} />
+            <Skeleton variant='rectangular' animation="wave" sx={{ width : "60%", height: "12px", my: 0.5}} />
+          </Fragment>
+        ) : (
+          <Fragment>
+            <ImageContainer>
+              <Image src={service.icon} alt={service.title} />
+            </ImageContainer>
+            <Typography variant='h4' mt={2} mb={0.9} fontSize={{ lg: 18, xl: 26}} color="black" >{service.title}</Typography>
+            <Typography mt={{ xl: 1}} fontSize={{ lg: 14 , xl : 18}}>{service.excert}</Typography>
+          </Fragment>
+        )}
       </Box>
     </BoxBorder>
   )

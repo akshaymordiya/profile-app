@@ -48,7 +48,9 @@ const BoxWrapper = styled(MuiBox)(({ theme }) => ({
   placeItems: 'center'
 }))
 
-const Expereince = () => {
+const Expereince = ({
+  showLoader = false
+}) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -104,6 +106,7 @@ const Expereince = () => {
       }}
       textPosition={textPosition}
       autoHeight={isMobile}
+      showLoader={showLoader}
     >
       <Box position={textPosition}>
         <BoxWrapper>

@@ -14,7 +14,9 @@ const Box = styled(MuiBox)(({ theme }) => ({
   alignItems: 'center',
 }));
 
-const OngoingWorks = () => {
+const OngoingWorks = ({
+  showLoader = false
+}) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -70,6 +72,7 @@ const OngoingWorks = () => {
       }}
       noChildrens
       forcedPosition="center"
+      showLoader={showLoader}
     >
     </DetailBox>
   )

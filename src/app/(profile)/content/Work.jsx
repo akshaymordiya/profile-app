@@ -26,7 +26,9 @@ const LottieOptions = {
   }
 };
 
-const CompletedWork = () => {
+const CompletedWork = ({
+  showLoader = false
+}) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -82,7 +84,7 @@ const CompletedWork = () => {
         }
       }}
       textPosition={isMobile ? "bottom" : "right"}
-      autoHeight={!isMobile}
+      showLoader={showLoader}
     >
       <Box>
         <Lottie 

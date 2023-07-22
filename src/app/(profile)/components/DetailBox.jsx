@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import MuiBox from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 
 import {
@@ -17,22 +18,27 @@ const forcedXPosition = {
 const Box = styled(MuiBox, { shouldForwardProp: prop =>  ![
   "position", 
   "padding",
-  "noChildrens"
-].includes(prop)})(({ theme, padding, position, noChildrens }) => ({
+  "noChildrens",
+  "showLoader"
+].includes(prop)})(({ theme, padding, position, noChildrens, showLoader }) => ({
   padding: padding ? padding : theme.spacing(2),
   position: 'relative',
   borderRadius: theme.general.borderRadiusLg,
-  background: theme.palette.white.main,
+  background: showLoader ? theme.palette.white.light: theme.palette.white.main,
   minHeight: (["left", "right"].includes(position)|| noChildrens) ? "fit-content" : "230px",
   height: (["left", "right"].includes(position)) ? "auto" : "100%",
   [theme.breakpoints.up('xl')]: {
     height: "100%"
   },
   overflow: 'hidden',
-  boxShadow: theme.colors.shadows.cardSmooth
+  boxShadow: theme.colors.shadows.cardSmooth,
+  ...(showLoader && {
+    minHeight: (["left", "right"].includes(position) || noChildrens) ? "130px" : "230px",
+    boxShadow: 'none'
+  })
 }));
 
-const BoxWrapper = styled(MuiBox, { shouldForwardProp: prop => !["position", "forcePositionToBottom"].includes(prop) })(({ theme, position, forcedPosition }) => ({
+const BoxWrapper = styled(MuiBox, { shouldForwardProp: prop => !["position", "forcedPosition"].includes(prop) })(({ theme, position, forcedPosition }) => ({
   display: 'flex',
   flexDirection: position === "top" ? 'column-reverse' : 'column',
   justifyContent: forcedPosition ? forcedXPosition[forcedPosition] : 'space-between',
@@ -47,11 +53,13 @@ const MuiBoxSxForXPosition = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  alignItems: "center"
+  alignItems: "center",
+  width: "100%"
 }
 
 const MuiBoxSxForYPosition = {
-  textAlign: 'center'
+  textAlign: 'center',
+  width: "100%"
 }
 
 const DetailBox = ({
@@ -63,28 +71,52 @@ const DetailBox = ({
   secondTextProps,
   padding = null,
   forcedPosition = false,
-  noChildrens = false
+  noChildrens = false,
+  showLoader = false
 }) => {
+
+  let TextSkeleton = <Fragment></Fragment>;
+
+  if(showLoader){
+    TextSkeleton = (
+      <Fragment>
+        <Skeleton variant='rectangular' animation="wave" sx={{ width: "100%", height: "16px", my: 2}} />
+        <Skeleton variant='rectangular' animation="wave" sx={{ width: "100%", height: "16px", my: 2}} />
+      </Fragment>
+    )
+  }
 
   if(['left', 'right'].includes(textPosition)){
     return (
-      <Box padding={padding} position={textPosition}>
+      <Box padding={padding} position={textPosition} showLoader={showLoader}>
         <Grid container>
           <Grid item xs={6} md={6} lg= {6}>
             {textPosition === "left" ? (
-              <MuiBox sx={MuiBoxSxForXPosition}>
-                <Typography {...firstTextProps}>{firstText}</Typography>
-                <Typography {...secondTextProps}>{secondText}</Typography>
+              <MuiBox sx={{...MuiBoxSxForXPosition, ...(showLoader ? { px: 2 } : {})}}>
+                {!showLoader ? (
+                  <Fragment>
+                    <Typography {...firstTextProps}>{firstText}</Typography>
+                    <Typography {...secondTextProps}>{secondText}</Typography>
+                  </Fragment>
+                ) : TextSkeleton }
               </MuiBox>
+            ) : showLoader ? (
+              <Skeleton variant='rectangular' sx={{ height: "100%", width: "100%" }} />
             ) : children }
           </Grid>
           <Grid item xs={6} md={6} lg= {6}>
             {textPosition === "right" ? (
-              <MuiBox sx={MuiBoxSxForXPosition}>
-                <Typography {...firstTextProps}>{firstText}</Typography>
-                <Typography {...secondTextProps}>{secondText}</Typography>
+              <MuiBox sx={{...MuiBoxSxForXPosition, ...(showLoader ? { px: 2 } : {})}}>
+                {!showLoader ? (
+                  <Fragment>
+                    <Typography {...firstTextProps}>{firstText}</Typography>
+                    <Typography {...secondTextProps}>{secondText}</Typography>
+                  </Fragment>
+                ) : TextSkeleton }
               </MuiBox>
-            ) : children}
+            ) : showLoader ? (
+              <Skeleton variant='rectangular' sx={{ height: "100%", width: "100%"}} />
+            ) : children }
           </Grid>
         </Grid>
       </Box>
@@ -92,19 +124,27 @@ const DetailBox = ({
   }
 
   return (
-    <Box padding={padding} position={textPosition} noChildrens={noChildrens}>
+    <Box padding={padding} position={textPosition} noChildrens={noChildrens} showLoader={showLoader}>
       <BoxWrapper position={textPosition} forcedPosition={forcedPosition}>
         {noChildrens ? (
           <Fragment>
-            <Typography {...firstTextProps}>{firstText}</Typography>
-            <Typography {...secondTextProps}>{secondText}</Typography>
+            {showLoader ? TextSkeleton : (
+              <Fragment>
+                <Typography {...firstTextProps}>{firstText}</Typography>
+                <Typography {...secondTextProps}>{secondText}</Typography>
+              </Fragment>
+            )}
           </Fragment>
         ) : (
           <Fragment>
-            {children}
+            {showLoader ? <Skeleton variant='rectangular' animation="wave" sx={{ height: "100px", width: "100%"}} /> : children}
             <MuiBox sx={MuiBoxSxForYPosition}>
-              <Typography {...firstTextProps}>{firstText}</Typography>
-              <Typography {...secondTextProps}>{secondText}</Typography>
+              {showLoader ? TextSkeleton : (
+                <Fragment>
+                  <Typography {...firstTextProps}>{firstText}</Typography>
+                  <Typography {...secondTextProps}>{secondText}</Typography>
+                </Fragment>
+              )}
             </MuiBox>
           </Fragment>
         )}

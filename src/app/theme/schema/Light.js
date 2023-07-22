@@ -242,7 +242,7 @@ export const LightTheme = createTheme({
     },
     brown: {
       lighter: themeColors.brownLight,
-      light: lighten(themeColors.brown, 0.25),
+      light: lighten(themeColors.brown, 0.4),
       main: themeColors.brown,
       dark: darken(themeColors.brown, 0.2)
     },
@@ -543,6 +543,16 @@ export const LightTheme = createTheme({
           },
           '100%': {
             transform: 'translate(3%, 3%)'
+          }
+        }
+      }
+    },
+    MuiSkeleton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          '&::after': {
+            background: `linear-gradient( 90deg, transparent, ${colors.white.lighter}, transparent )`
           }
         }
       }

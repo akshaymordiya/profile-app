@@ -82,6 +82,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       border: 'none',
       borderRadius:  `0px ${theme.general.borderRadiusLg} ${theme.general.borderRadiusLg} 0px`,
       background: theme.colors.alpha.white[100],
+      boxShadow: theme.colors.shadows.cardSmooth,
       ...(open ? openedMixin(theme) : closedMixin(theme)) 
     }
   }),
@@ -93,6 +94,7 @@ const SidebarWrapper = styled(Box)(
         position: relative;
         z-index: 7;
         height: 100%;
+
 `
 );
 

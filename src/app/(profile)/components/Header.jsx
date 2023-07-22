@@ -34,8 +34,8 @@ const Box = styled(MuiBox, { shouldForwardProp : (prop) => prop !== "isScrolled"
     height: 'fit-content'
   },
   ...(isScrolled && {
-    background: theme.colors.white.main,
-    boxShadow: theme.colors.shadows.box,
+    background: theme.colors.primary.light,
+    boxShadow: theme.colors.shadows.cardSmooth,
     zIndex: '99'
   })
 }));

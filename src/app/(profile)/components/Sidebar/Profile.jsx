@@ -19,7 +19,7 @@ const BrandTitle = styled(TypoGraphy)(({ theme }) => ({
   fontSize: '1.2rem',
   fontFamily: '--font-georama',
   color: theme.colors.black.main,
-  marginTop: theme.spacing(3),
+  marginTop: theme.spacing(2),
   fontWeight: 600
 }))
 
@@ -42,7 +42,7 @@ const Chip = styled(MuiChip)(({ theme }) => ({
 
 const Profile = () => {
   const { sidebarToogle } = useContext(SidebarContext);
-  const profileAspectRatio = sidebarToogle ? 70 : 30;
+  const profileAspectRatio = sidebarToogle ? 70 : 40;
   return (
     <Box mt={1} mb={3} 
       display="flex" 
